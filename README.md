@@ -19,5 +19,21 @@ devtools::install_github("muschellij2/checkout")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-checkoutInput()
+# Define the UI
+ui <- bootstrapPage(
+  checkoutInput(id = "shinytoken", publickey = "pk_test_6pRNASCoBOKtIshFeQd4XMUh"),
+  # an element for unformatted text
+  verbatimTextOutput("results")
+)
+
+
+# Define the server code
+server <- function(input, output) {
+  output$results = renderPrint({
+    input$shinytoken
+  })
+}
+
+# Return a Shiny app object
+shinyApp(ui = ui, server = server)
 ```
